@@ -72,7 +72,7 @@ Portfolio
 |   |   |   |-- config
 |   |   |   |-- domain
 |   |   |
-|   |   |-- config
+|   |   |-- config.example
 |   |       |-- .env.example
 |   |
 |   |-- .github
