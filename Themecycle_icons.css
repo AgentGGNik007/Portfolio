@@ -1,0 +1,102 @@
+:root {
+  --icon-fill: currentColor;
+  --icon-fill-hover: currentColor;
+}
+
+/* Grundlegende SVG-Regeln */
+svg.icon {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  shape-rendering: geometricPrecision;
+}
+
+.icon > * {
+  transform-origin: center;
+}
+
+/* Fills */
+.icon > :is(.sun, .moon, .split-left, .split-right) {
+  fill: var(--icon-fill);
+}
+
+/* Strokes */
+.icon > :is(.sun-beams, .horizon, .split-ring) {
+  stroke: var(--icon-fill);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  fill: none;
+}
+
+/* ----------------------------- */
+/* LIGHT MODE – volle Sonne */
+/* ----------------------------- */
+.icon--light .sun { opacity: 1; }
+.icon--light .sun-beams { opacity: 1; }
+
+.icon--light .moon,
+.icon--light .horizon,
+.icon--light .contrast-split {
+  opacity: 0;
+}
+
+/* ----------------------------- */
+/* DARK MODE – Mond (mask-basiert) */
+/* ----------------------------- */
+.icon--dark .moon { opacity: 1; }
+
+.icon--dark .sun,
+.icon--dark .sun-beams,
+.icon--dark .horizon,
+.icon--dark .contrast-split {
+  opacity: 0;
+}
+
+/* ----------------------------- */
+/* GREY MODE – halbe Sonne + Horizont */
+/* ----------------------------- */
+.icon--grey .sun { opacity: 1; }
+
+/* nur die 3 oberen Strahlen */
+.icon--grey .sun-beams { opacity: 1; }
+
+/* Horizontlinie sichtbar */
+.icon--grey .horizon { opacity: 1; }
+
+.icon--grey .moon,
+.icon--grey .contrast-split {
+  opacity: 0;
+}
+
+/* ----------------------------- */
+/* HIGH CONTRAST – Half/Half Circle */
+/* ----------------------------- */
+.icon--contrast .contrast-split { opacity: 1; }
+
+.icon--contrast .split-left {
+  fill: var(--icon-fill);
+}
+
+.icon--contrast .split-right {
+  fill: rgba(255,255,255,0.35);
+}
+
+.icon--contrast .sun,
+.icon--contrast .sun-beams,
+.icon--contrast .moon,
+.icon--contrast .horizon {
+  opacity: 0;
+}
+
+/* ----------------------------- */
+/* Optional: sanfte Bewegung */
+/* ----------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  svg.icon {
+    transition: transform 0.15s ease;
+  }
+
+  svg.icon:hover {
+    transform: translateY(-1px);
+  }
+}
