@@ -54,26 +54,3 @@ Portfolio
 |-- .gitignore
 |-- LICENSE
 |-- README.md
-|-- Projekt
-|   |-- frontend
-|   |   |-- public
-|   |   |-- src
-|   |       |-- assets
-|   |       |-- components
-|   |       |-- pages
-|   |       |-- utils
-|   |
-|   |-- backend
-|   |   |-- cmd
-|   |   |   |-- server
-|   |   |
-|   |   |-- internal
-|   |   |   |-- http
-|   |   |   |-- config
-|   |   |   |-- domain
-|   |   |
-|   |   |-- config.example
-|   |       |-- .env.example
-|   |
-|   |-- .github
-|       |-- workflows
