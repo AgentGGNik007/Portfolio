@@ -1,6 +1,8 @@
 # Portfolio
 # Persönliches Web-Portfolio – Niklas Rühl
 
+![Status](https://img.shields.io/badge/Status-Work%20in%20Progress-orange)
+
 Dieses Repository enthält den Aufbau meines persönlichen Web-Portfolios.  
 Bis zum Start meiner Umschulung möchte ich eine eigenständige und klar strukturierte Referenz entwickeln, die meinen technischen Hintergrund sowie meine Arbeitsweise darstellt.  
 Ziel ist es, zukünftigen Arbeitgebern einen transparenten Einblick in meine Kenntnisse und Projekte zu ermöglichen.
