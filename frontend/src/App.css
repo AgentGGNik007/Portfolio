@@ -1,0 +1,114 @@
+/* App.css */
+
+/* =========================================================
+   Base Reset
+========================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* =========================================================
+   Global Focus
+========================================================= */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* =========================================================
+   Links
+========================================================= */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* =========================================================
+   Reduced Motion
+========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   Buttons
+========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-soft);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  font-family: inherit;
+
+  transition: opacity 0.15s ease;
+}
+
+.btn:hover { opacity: 0.8; text-decoration: none; }
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: transparent;
+}
+
+.btn-ghost {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--border-soft);
+  border-radius: 0.5rem;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: opacity 0.15s ease;
+}
+
+.btn-ghost:hover    { opacity: 0.8; }
+.btn-ghost:disabled { opacity: 0.3; cursor: default; }
+
+/* =========================================================
+   Status
+========================================================= */
+.status-success { color: var(--status-success); }
+.status-warning { color: var(--status-warning); }
+.status-error   { color: var(--status-error); }
+
+/* =========================================================
+   Utility
+========================================================= */
+.hidden      { display: none !important; }
+.text-center { text-align: center; }
+.text-muted  { color: var(--text-muted); }
+.text-soft   { color: var(--text-soft); }
