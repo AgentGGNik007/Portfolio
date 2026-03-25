@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { useState } from 'react'
 import { type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { useSidebar }  from '../hooks/useSidebar'
+import { useSidebar } from '../hooks/useSidebar'
+import { useTheme } from '../hooks/useTheme'
+import { ThemeIcon } from '../assets/components/ThemeIcon'
 import './MainLayout.css'
 
 type MainLayoutProps = {
@@ -10,11 +13,21 @@ type MainLayoutProps = {
 }
 
 function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
-  const { isOpen, open , close, } = useSidebar()
+  const { isOpen, open, close } = useSidebar()
+  const { theme, setTheme, cycleTheme } = useTheme()
+  const [themePopoverOpen, setThemePopoverOpen] = useState(false)
+
+  const themeLabel = (key: string) => {
+    if (key === 'light') return 'Hell'
+    if (key === 'grey') return 'Grau'
+    if (key === 'dark') return 'Dunkel'
+    if (key === 'contrast') return 'Kontrast'
+    return key
+  }
+
   return (
     <div className="layout">
 
-      {/* Topbar */}
       <header className="topbar" role="banner">
         <button
           className="topbar-menu-btn btn-ghost"
@@ -33,34 +46,22 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
           </svg>
         </button>
 
-        <span className="topbar-title">Portfolio – Niklas Rühl</span>
+        <span className="topbar-title">Portfolio - Niklas Rühl</span>
 
         <div className="topbar-actions">
-          {/* Sprach-Cycle */}
-          <button
-            className="btn-ghost topbar-lang-btn"
-            aria-label="Sprache wechseln"
-          >
+          <button className="btn-ghost topbar-lang-btn" aria-label="Sprache wechseln">
             🇩🇪
           </button>
-
-          {/* Theme-Popover */}
           <button
             className="btn-ghost topbar-theme-btn"
-            aria-label="Design: Dunkler Modus aktiv"
+            aria-label={`Design wechseln: ${themeLabel(theme)} aktiv`}
+            onClick={cycleTheme}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-              strokeLinejoin="round" width="24" height="24" aria-hidden="true">
-              <g transform="rotate(15 12 12)">
-                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8Z"/>
-              </g>
-            </svg>
+            <ThemeIcon theme={theme} size={24} />
           </button>
         </div>
       </header>
 
-      {/* Sidebar */}
       <nav
         id="sidebar"
         className={`sidebar${isOpen ? ' is-open' : ''}`}
@@ -69,16 +70,14 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
         aria-hidden={!isOpen}
       >
         <div className="sidebar-header">
-          <span className="sidebar-title">Portfolio — Niklas Rühl</span>
+          <span className="sidebar-title">Portfolio - Niklas Rühl</span>
           <div className="sidebar-header-actions">
-            <button className="btn-ghost sidebar-theme-btn" aria-label="Design: Dunkler Modus aktiv">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                strokeLinejoin="round" width="24" height="24" aria-hidden="true">
-                <g transform="rotate(15 12 12)">
-                  <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8Z"/>
-                </g>
-              </svg>
+            <button
+              className="btn-ghost sidebar-theme-btn"
+              aria-label={`Design wechseln: ${themeLabel(theme)} aktiv`}
+              onClick={cycleTheme}
+            >
+              <ThemeIcon theme={theme} size={24} />
             </button>
             <button className="btn-ghost sidebar-close-btn" aria-label="Navigation schließen" onClick={close}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -102,23 +101,20 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
           <button className="btn-ghost sidebar-lang-btn" aria-label="Sprache wechseln">
             🇩🇪
           </button>
-          <a href="/datenschutz" className="sidebar-legal-link">Datenschutz</a>
+          <Link to="/datenschutz" className="sidebar-legal-link" onClick={close}>Datenschutz</Link>
         </div>
       </nav>
 
-      {/* Overlay */}
-      <div 
+      <div
         className={`sidebar-overlay${isOpen ? ' is-visible' : ''}`}
-        aria-hidden="true" 
+        aria-hidden="true"
         onClick={close}
       />
 
-      {/* Hauptinhalt */}
       <main className="main-content" id="main-content" tabIndex={-1}>
         {children}
       </main>
 
-      {/* Footer */}
       <footer className="app-footer" role="contentinfo">
         <div className="footer-left">
           <span className="footer-date">Stand: {__BUILD_DATE__}</span>
@@ -135,43 +131,42 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
         </div>
 
         <div className="footer-right">
-          {/* Theme-Popover */}
           <div className="footer-theme" role="group" aria-label="Design wählen">
             <button
-              id="theme-menu-toggle"
               className="btn-ghost footer-theme-btn"
-              aria-label="Design: Dunkler Modus aktiv"
+              aria-label={`Design wechseln: ${themeLabel(theme)} aktiv`}
               aria-haspopup="true"
-              aria-expanded="false"
+              aria-expanded={themePopoverOpen}
+              onClick={() => setThemePopoverOpen((prev) => !prev)}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                strokeLinejoin="round" width="20" height="20" aria-hidden="true">
-                <g transform="rotate(15 12 12)">
-                  <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 1 0 9.8 9.8Z"/>
-                </g>
-              </svg>
-              <span className="footer-theme-label">Dunkel</span>
+              <ThemeIcon theme={theme} size={20} />
+              <span className="footer-theme-label">{themeLabel(theme)}</span>
             </button>
 
-            <div id="theme-menu" className="theme-menu" role="menu">
-              {[
-                { key: 'light', label: 'Hell' },
-                { key: 'grey', label: 'Grau' },
-                { key: 'dark', label: 'Dunkel' },
-                { key: 'contrast', label: 'Kontrast' },
-              ].map((t) => (
-                <button
-                  key={t.key}
-                  className="theme-menu-item"
-                  role="menuitem"
-                  data-theme={t.key}
-                  aria-label={`Design: ${t.label} aktivieren`}
-                >
-                  {t.label}
-                </button>
-              ))}
-            </div>
+            {themePopoverOpen && (
+              <div className="theme-menu is-open" role="menu">
+                {[
+                  { key: 'light', label: 'Hell' },
+                  { key: 'grey', label: 'Grau' },
+                  { key: 'dark', label: 'Dunkel' },
+                  { key: 'contrast', label: 'Kontrast' },
+                ].map((t) => (
+                  <button
+                    key={t.key}
+                    className={`theme-menu-item${theme === t.key ? ' is-active' : ''}`}
+                    role="menuitem"
+                    aria-label={`Design: ${t.label} aktivieren`}
+                    onClick={() => {
+                      setTheme(t.key as 'light' | 'grey' | 'dark' | 'contrast')
+                      setThemePopoverOpen(false)
+                    }}
+                  >
+                    <ThemeIcon theme={t.key} size={18} />
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </footer>
