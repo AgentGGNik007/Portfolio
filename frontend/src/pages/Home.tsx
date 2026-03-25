@@ -5,7 +5,6 @@ function Home() {
   const { t } = useTranslation()
   return (
     <MainLayout pageKey="nav.home">
-      <h1>{t('nav.home.title')}</h1>
     </MainLayout>
   )
 }

@@ -8,10 +8,9 @@ function Projects() {
 
   return (
     <MainLayout pageKey="nav.projects">
-      <h1>{t('nav.projects.title')}</h1>
 
-      {loading && <p>Laden...</p>}
-      {error && <p className="status-error">{error}</p>}
+      {loading && <p>{t('projects.loading')}</p>}
+      {error && <p className="status-error">{t('projects.error')}</p>}
 
       {!loading && !error && (
         <ul>
@@ -22,12 +21,12 @@ function Projects() {
               <p>{project.tech.join(', ')}</p>
               {project.github && (
                 <a href={project.github} target="_blank" rel="noopener noreferrer">
-                  GitHub
+                  {t('projects.github')}
                 </a>
               )}
               {project.live && (
                 <a href={project.live} target="_blank" rel="noopener noreferrer">
-                  Live
+                  {t('projects.live')}
                 </a>
               )}
             </li>

@@ -17,6 +17,8 @@ body {
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* =========================================================
@@ -112,3 +114,51 @@ a:hover {
 .text-center { text-align: center; }
 .text-muted  { color: var(--text-muted); }
 .text-soft   { color: var(--text-soft); }
+
+/* =========================================================
+   Formular
+========================================================= */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+
+input,
+textarea {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 0.5rem;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+textarea {
+  resize: vertical;
+}
+

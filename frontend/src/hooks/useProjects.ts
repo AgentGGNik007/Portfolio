@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 type Project = {
   id: number
@@ -10,22 +11,31 @@ type Project = {
 }
 
 export function useProjects() {
+  const { i18n } = useTranslation()
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('/api/projects')
+    let cancelled = false
+
+    fetch(`/api/projects?lang=${i18n.language}`)
       .then((res) => res.json())
       .then((data) => {
-        setProjects(data)
-        setLoading(false)
+        if (!cancelled) {
+          setProjects(data)
+          setLoading(false)
+        }
       })
       .catch(() => {
-        setError('Projekte konnten nicht geladen werden.')
-        setLoading(false)
+        if (!cancelled) {
+          setError('error')
+          setLoading(false)
+        }
       })
-  }, [])
+
+    return () => { cancelled = true }
+  }, [i18n.language])
 
   return { projects, loading, error }
 }

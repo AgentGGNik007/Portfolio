@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react'
 import { type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
@@ -14,7 +13,7 @@ type MainLayoutProps = {
   children: ReactNode
 }
 
-function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
+function MainLayout({ pageKey: pageKey, children }: MainLayoutProps) {
   const { isOpen, open, close } = useSidebar()
   const { theme, setTheme, cycleTheme } = useTheme()
   useSwipe({
@@ -58,7 +57,7 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
           </svg>
         </button>
 
-        <span className="topbar-title">{t('app.topbarTitle')}</span>
+        <span className="topbar-title">{t(`${pageKey}.title`)}</span>
 
         <div className="topbar-actions">
           <button 

@@ -22,5 +22,42 @@
   "app": {
     "sidebarTitle": "Portfolio — Niklas Rühl",
     "topbarTitle": "Portfolio — Niklas Rühl"
+  },
+  "form": {
+    "name": "Name",
+    "email": "E-Mail",
+    "message": "Nachricht",
+    "send": "Senden",
+    "sending": "Senden...",
+    "success": "Nachricht erfolgreich gesendet.",
+    "error": "Fehler beim Senden. Bitte versuche es erneut."
+  },
+  "projects": {
+    "github": "GitHub",
+    "live": "Live",
+    "loading": "Projekte werden geladen...",
+    "error": "Projekte konnten nicht geladen werden."
+  },
+  "resume": {
+    "experience": "Berufserfahrung",
+    "education": "Ausbildung",
+    "skills": "Kenntnisse",
+    "languages": "Sprachen"
+  },
+  "privacy": {
+    "intro": "Diese Datenschutzerklärung informiert über die Verarbeitung personenbezogener Daten auf dieser Website.",
+    "cookies": "Cookie-Einstellungen",
+    "cookieLevel": {
+      "functional": "Funktional (erforderlich)",
+      "comfort": "Komfort",
+      "extended": "Erweitert"
+    },
+    "save": "Einstellungen speichern"
+  },
+  "cookie": {
+    "message": "Diese Website verwendet Cookies für grundlegende Funktionen.",
+    "accept": "Akzeptieren",
+    "decline": "Nur notwendige",
+    "settings": "Einstellungen"
   }
 }

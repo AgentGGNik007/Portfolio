@@ -5,7 +5,6 @@ function Privacy() {
   const { t } = useTranslation()
   return (
     <MainLayout pageKey="legal.privacy">
-      <h1>{t('legal.privacy.title')}</h1>
     </MainLayout>
   )
 }

@@ -29,7 +29,7 @@
 
 .topbar-title {
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 2rem;
   color: var(--text);
 }
 
@@ -155,8 +155,11 @@
 ========================================================= */
 .main-content {
   flex: 1;
-  padding: 2rem 1.5rem;
+  padding: 5rem 1.5rem;
   outline: none;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 /* =========================================================
