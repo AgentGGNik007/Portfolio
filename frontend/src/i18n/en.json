@@ -1,0 +1,69 @@
+{
+  "nav": {
+    "home": { "short": "Home", "title": "Home" },
+    "projects": { "short": "Projects", "title": "Projects" },
+    "resume": { "short": "CV", "title": "Resume" },
+    "contact": { "short": "Contact", "title": "Contact" }
+  },
+  "legal": {
+    "privacy": { "short": "Privacy", "title": "Privacy Policy" }
+  },
+  "ui": {
+    "theme": {
+      "label": "Theme",
+      "light": "Light",
+      "grey": "Grey",
+      "dark": "Dark",
+      "contrast": "Contrast"
+    },
+    "language": { "label": "Language" },
+    "view": { "label": "View" }
+  },
+  "app": {
+    "sidebarTitle": "Portfolio — Niklas Rühl",
+    "topbarTitle": "Portfolio — Niklas Rühl"
+  },
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "sending": "Sending...",
+    "success": "Message sent successfully.",
+    "error": "Failed to send. Please try again."
+  },
+  "projects": {
+    "github": "GitHub",
+    "live": "Live",
+    "loading": "Loading projects...",
+    "error": "Failed to load projects.",
+    "wip": "Work in Progress",
+    "done": "Completed",
+  },
+  "resume": {
+    "experience": "Work Experience",
+    "education": "Education",
+    "skills": "Skills",
+    "languages": "Languages",
+    "initiative": "Personal Initiative & Projects",
+    "projectsLink": "View projects →",
+    "loading": "Loading resume...",
+    "error": "Failed to load resume."
+  },
+  "privacy": {
+    "intro": "This privacy policy informs you about the processing of personal data on this website.",
+    "cookies": "Cookie Settings",
+    "cookieLevel": {
+      "functional": "Functional (required)",
+      "comfort": "Comfort",
+      "extended": "Extended"
+    },
+    "save": "Save Settings"
+  },
+  "cookie": {
+    "message": "This website uses cookies for basic functionality.",
+    "accept": "Accept",
+    "decline": "Necessary only",
+    "settings": "Settings"
+  }
+}
