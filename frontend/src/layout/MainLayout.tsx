@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { ReactNode } from 'react'
+import { type ReactNode } from 'react'
+import { Link } from 'react-router-dom'
+import { useSidebar }  from '../hooks/useSidebar'
 import './MainLayout.css'
 
 type MainLayoutProps = {
@@ -8,6 +10,7 @@ type MainLayoutProps = {
 }
 
 function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
+  const { isOpen, open , close, } = useSidebar()
   return (
     <div className="layout">
 
@@ -16,8 +19,9 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
         <button
           className="topbar-menu-btn btn-ghost"
           aria-label="Navigation öffnen"
-          aria-expanded="false"
+          aria-expanded={isOpen}
           aria-controls="sidebar"
+          onClick={open}
         >
           <span className="sr-only">Menü</span>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -59,10 +63,10 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
       {/* Sidebar */}
       <nav
         id="sidebar"
-        className="sidebar"
+        className={`sidebar${isOpen ? ' is-open' : ''}`}
         role="navigation"
         aria-label="Hauptnavigation"
-        aria-hidden="true"
+        aria-hidden={!isOpen}
       >
         <div className="sidebar-header">
           <span className="sidebar-title">Portfolio — Niklas Rühl</span>
@@ -76,7 +80,7 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
                 </g>
               </svg>
             </button>
-            <button className="btn-ghost sidebar-close-btn" aria-label="Navigation schließen">
+            <button className="btn-ghost sidebar-close-btn" aria-label="Navigation schließen" onClick={close}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" strokeWidth="2" strokeLinecap="round"
                 strokeLinejoin="round" width="24" height="24" aria-hidden="true">
@@ -88,10 +92,10 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
         </div>
 
         <ul className="sidebar-nav" role="list">
-          <li><a href="/" className="sidebar-link">Home</a></li>
-          <li><a href="/projekte" className="sidebar-link">Projekte</a></li>
-          <li><a href="/lebenslauf" className="sidebar-link">Lebenslauf</a></li>
-          <li><a href="/kontakt" className="sidebar-link">Kontakt</a></li>
+          <li><Link to="/" className="sidebar-link" onClick={close}>Home</Link></li>
+          <li><Link to="/projekte" className="sidebar-link" onClick={close}>Projekte</Link></li>
+          <li><Link to="/lebenslauf" className="sidebar-link" onClick={close}>Lebenslauf</Link></li>
+          <li><Link to="/kontakt" className="sidebar-link" onClick={close}>Kontakt</Link></li>
         </ul>
 
         <div className="sidebar-footer">
@@ -103,7 +107,11 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
       </nav>
 
       {/* Overlay */}
-      <div className="sidebar-overlay" aria-hidden="true" />
+      <div 
+        className={`sidebar-overlay${isOpen ? ' is-visible' : ''}`}
+        aria-hidden="true" 
+        onClick={close}
+      />
 
       {/* Hauptinhalt */}
       <main className="main-content" id="main-content" tabIndex={-1}>
@@ -122,8 +130,8 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
           >
             GitHub
           </a>
-          <a href="/kontakt">Kontakt</a>
-          <a href="/datenschutz">Datenschutz</a>
+          <Link to="/kontakt">Kontakt</Link>
+          <Link to="/datenschutz">Datenschutz</Link>
         </div>
 
         <div className="footer-right">
