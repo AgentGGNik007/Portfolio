@@ -36,13 +36,19 @@
     "github": "GitHub",
     "live": "Live",
     "loading": "Projekte werden geladen...",
-    "error": "Projekte konnten nicht geladen werden."
+    "error": "Projekte konnten nicht geladen werden.",
+    "wip": "In Entwicklung",
+    "done": "Abgeschlossen",
   },
   "resume": {
     "experience": "Berufserfahrung",
     "education": "Ausbildung",
     "skills": "Kenntnisse",
-    "languages": "Sprachen"
+    "languages": "Sprachen",
+    "initiative": "Eigeninitiative & Projekte",
+    "projectsLink": "Projekte ansehen →",
+    "loading": "Lebenslauf wird geladen...",
+    "error": "Lebenslauf konnte nicht geladen werden."
   },
   "privacy": {
     "intro": "Diese Datenschutzerklärung informiert über die Verarbeitung personenbezogener Daten auf dieser Website.",

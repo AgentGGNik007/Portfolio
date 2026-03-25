@@ -6,19 +6,16 @@ function Projects() {
   const { t } = useTranslation()
   const { projects, loading, error } = useProjects()
 
-  return (
-    <MainLayout pageKey="nav.projects">
+  const done = projects.filter((p) => p.status === 'done')
+  const wip = projects.filter((p) => p.status === 'wip')
 
-      {loading && <p>{t('projects.loading')}</p>}
-      {error && <p className="status-error">{t('projects.error')}</p>}
-
-      {!loading && !error && (
-        <ul>
-          {projects.map((project) => (
-            <li key={project.id}>
-              <h2>{project.title}</h2>
-              <p>{project.description}</p>
-              <p>{project.tech.join(', ')}</p>
+  const renderGroup = (list: typeof projects) => (
+    <div className="projects-grid">
+      {list.map((project) => (
+        <div className="project-item" key={project.id}>
+          <div className="project-header">
+            <span className="project-title">{project.title}</span>
+            <div className="project-links">
               {project.github && (
                 <a href={project.github} target="_blank" rel="noopener noreferrer">
                   {t('projects.github')}
@@ -29,9 +26,39 @@ function Projects() {
                   {t('projects.live')}
                 </a>
               )}
-            </li>
-          ))}
-        </ul>
+            </div>
+          </div>
+          <p className="project-description">{project.description}</p>
+          <div className="project-tech">
+            {project.tech.map((t) => (
+              <span className="tech-tag" key={t}>{t}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+
+  return (
+    <MainLayout pageKey="nav.projects">
+      {loading && <p>{t('projects.loading')}</p>}
+      {error && <p className="status-error">{t('projects.error')}</p>}
+
+      {!loading && !error && (
+        <div className="projects-wrapper">
+          {done.length > 0 && (
+            <section>
+              <p className="projects-label">{t('projects.done')}</p>
+              {renderGroup(done)}
+            </section>
+          )}
+          {wip.length > 0 && (
+            <section>
+              <p className="projects-label">{t('projects.wip')}</p>
+              {renderGroup(wip)}
+            </section>
+          )}
+        </div>
       )}
     </MainLayout>
   )

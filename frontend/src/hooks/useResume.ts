@@ -1,30 +1,40 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-type Project = {
+type ResumeEntry = {
   id: number
+  year: string
   title: string
-  description: string
-  tech: string[]
-  github: string | null
-  live: string | null
-  status: 'done' | 'wip'
+  sub: string
 }
 
-export function useProjects() {
+type Language = {
+  id: number
+  name: string
+  level: string
+}
+
+type ResumeData = {
+  experience: ResumeEntry[]
+  education: ResumeEntry[]
+  initiative: ResumeEntry[]
+  languages: Language[]
+}
+
+export function useResume() {
   const { i18n } = useTranslation()
-  const [projects, setProjects] = useState<Project[]>([])
+  const [resume, setResume] = useState<ResumeData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     let cancelled = false
 
-    fetch(`/api/projects?lang=${i18n.language}`)
+    fetch(`/api/resume?lang=${i18n.language}`)
       .then((res) => res.json())
       .then((data) => {
         if (!cancelled) {
-          setProjects(data)
+          setResume(data)
           setLoading(false)
         }
       })
@@ -38,5 +48,5 @@ export function useProjects() {
     return () => { cancelled = true }
   }, [i18n.language])
 
-  return { projects, loading, error }
+  return { resume, loading, error }
 }
