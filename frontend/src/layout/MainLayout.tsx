@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import { useSidebar } from '../hooks/useSidebar'
 import { useTheme } from '../hooks/useTheme'
 import { ThemeIcon } from '../assets/components/ThemeIcon'
+import { useSwipe } from '../hooks/useSwipe'
+import { useTranslation } from 'react-i18next'
 import './MainLayout.css'
 
 type MainLayoutProps = {
@@ -15,15 +17,25 @@ type MainLayoutProps = {
 function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
   const { isOpen, open, close } = useSidebar()
   const { theme, setTheme, cycleTheme } = useTheme()
+  useSwipe({
+    onSwipeLeft: close,
+    onSwipeRight: open,
+  })
   const [themePopoverOpen, setThemePopoverOpen] = useState(false)
+  const { t, i18n } = useTranslation()
+  
 
-  const themeLabel = (key: string) => {
-    if (key === 'light') return 'Hell'
-    if (key === 'grey') return 'Grau'
-    if (key === 'dark') return 'Dunkel'
-    if (key === 'contrast') return 'Kontrast'
-    return key
+  const cycleLanguage = () => {
+  const next = i18n.language === 'de' ? 'en' : 'de'
+  i18n.changeLanguage(next)
+  try {
+    localStorage.setItem('portfolio.language', next)
+  } catch {
+    // intentionally empty — localStorage may be unavailable
   }
+}
+
+  const themeLabel = (key: string) => t(`ui.theme.${key}`)
 
   return (
     <div className="layout">
@@ -46,12 +58,17 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
           </svg>
         </button>
 
-        <span className="topbar-title">Portfolio - Niklas Rühl</span>
+        <span className="topbar-title">{t('app.topbarTitle')}</span>
 
         <div className="topbar-actions">
-          <button className="btn-ghost topbar-lang-btn" aria-label="Sprache wechseln">
-            🇩🇪
+          <button 
+            className="btn-ghost topbar-lang-btn" 
+            aria-label="Sprache wechseln"
+            onClick={cycleLanguage}
+            >
+            {i18n.language === 'de' ? '🇩🇪' : '🇬🇧'}
           </button>
+
           <button
             className="btn-ghost topbar-theme-btn"
             aria-label={`Design wechseln: ${themeLabel(theme)} aktiv`}
@@ -70,7 +87,7 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
         aria-hidden={!isOpen}
       >
         <div className="sidebar-header">
-          <span className="sidebar-title">Portfolio - Niklas Rühl</span>
+          <span className="sidebar-title">{t('app.sidebarTitle')}</span>
           <div className="sidebar-header-actions">
             <button
               className="btn-ghost sidebar-theme-btn"
@@ -91,17 +108,22 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
         </div>
 
         <ul className="sidebar-nav" role="list">
-          <li><Link to="/" className="sidebar-link" onClick={close}>Home</Link></li>
-          <li><Link to="/projekte" className="sidebar-link" onClick={close}>Projekte</Link></li>
-          <li><Link to="/lebenslauf" className="sidebar-link" onClick={close}>Lebenslauf</Link></li>
-          <li><Link to="/kontakt" className="sidebar-link" onClick={close}>Kontakt</Link></li>
+          <li><Link to="/" className="sidebar-link" onClick={close}>{t('nav.home.short')}</Link></li>
+          <li><Link to={i18n.language === 'de' ? '/projekte' : '/projects'} className="sidebar-link" onClick={close}>{t('nav.projects.short')}</Link></li>
+          <li><Link to={i18n.language === 'de' ? '/lebenslauf' : '/resume'} className="sidebar-link" onClick={close}>{t('nav.resume.short')}</Link></li>
+          <li><Link to={i18n.language === 'de' ? '/kontakt' : '/contact'} className="sidebar-link" onClick={close}>{t('nav.contact.short')}</Link></li>
         </ul>
 
         <div className="sidebar-footer">
-          <button className="btn-ghost sidebar-lang-btn" aria-label="Sprache wechseln">
-            🇩🇪
+          <button 
+            className="btn-ghost sidebar-lang-btn" 
+            aria-label="Sprache wechseln"
+            onClick={cycleLanguage}
+            >
+            {i18n.language === 'de' ? '🇩🇪' : '🇬🇧'}
           </button>
-          <Link to="/datenschutz" className="sidebar-legal-link" onClick={close}>Datenschutz</Link>
+          <Link to="/kontakt">{t('nav.contact.short')}</Link>
+          <Link to="/datenschutz">{t('legal.privacy.short')}</Link>
         </div>
       </nav>
 
@@ -126,8 +148,8 @@ function MainLayout({ pageKey: __pageKey, children }: MainLayoutProps) {
           >
             GitHub
           </a>
-          <Link to="/kontakt">Kontakt</Link>
-          <Link to="/datenschutz">Datenschutz</Link>
+          <Link to={i18n.language === 'de' ? '/kontakt' : '/contact'}>{t('nav.contact.short')}</Link>
+          <Link to={i18n.language === 'de' ? '/datenschutz' : '/privacy'}>{t('legal.privacy.short')}</Link>
         </div>
 
         <div className="footer-right">

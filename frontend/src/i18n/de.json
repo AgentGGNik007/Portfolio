@@ -1,0 +1,26 @@
+{
+  "nav": {
+    "home": { "short": "Home", "title": "Home" },
+    "projects": { "short": "Projekte", "title": "Projekte" },
+    "resume": { "short": "Lebenslauf", "title": "Lebenslauf" },
+    "contact": { "short": "Kontakt", "title": "Kontakt" }
+  },
+  "legal": {
+    "privacy": { "short": "Datenschutz", "title": "Datenschutzerklärung" }
+  },
+  "ui": {
+    "theme": {
+      "label": "Design",
+      "light": "Hell",
+      "grey": "Grau",
+      "dark": "Dunkel",
+      "contrast": "Kontrast"
+    },
+    "language": { "label": "Sprache" },
+    "view": { "label": "Ansicht" }
+  },
+  "app": {
+    "sidebarTitle": "Portfolio — Niklas Rühl",
+    "topbarTitle": "Portfolio — Niklas Rühl"
+  }
+}
